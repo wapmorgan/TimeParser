@@ -1,0 +1,114 @@
+{
+	"language": "Spanish",
+	"rules": [
+		{
+			"name": "time",
+			"type": "absolute",
+			"regex": "~((?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~u"
+		},
+		{
+			"name": "weekday",
+			"type": "absolute",
+			"regex": "~(en|el) (?<pronoun>este|próximo) (?<weekday>lunes|martes|miércoles|jueves|viernes|sábado|domingo)~iu"
+		},
+		{
+			"name": "year",
+			"type": "absolute",
+			"regex": "~(en|el) ((?<pronoun>este|próximo)|((?<digit>[[:digit:]]+))) año~iu"
+		},
+		{
+			"name": "month",
+			"type": "absolute",
+			"regex": "~(en|el) ((?<pronoun>este|próximo) месяце|(?<month>enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre))~iu"
+		},
+		{
+			"name": "week",
+			"type": "absolute",
+			"regex": "~(en|el) (?<pronoun>este|próximo) semana~iu"
+		},
+		{
+			"name": "hour",
+			"type": "relative",
+			"regex": "~(en ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) horas?)~u"
+		},
+		{
+			"name": "minute",
+			"type": "relative",
+			"regex": "~(en ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) minutos?)~u"
+		},
+		{
+			"name": "sec",
+			"type": "relative",
+			"regex": "~(en ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) segundos?)~u"
+		},
+		{
+			"name": "year",
+			"type": "relative",
+			"regex": "~(en ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) años?)~u"
+		},
+		{
+			"name": "week",
+			"type": "relative",
+			"regex": "~(en ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) semanas?)~u"
+		},
+		{
+			"name": "day",
+			"type": "relative",
+			"regex": "~(en ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) días?)~u"
+		},
+		{
+			"name": "month",
+			"type": "relative",
+			"regex": "~(en ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) mes(es)?)~u"
+		}
+	],
+	"week_days": {
+		"lunes": "monday",
+		"martes": "tuesday",
+		"miércoles": "wednesday",
+		"jueves": "thursday",
+		"viernes": "friday",
+		"sábado": "saturday",
+		"domingo": "sunday"
+	},
+	"pronouns": {
+		"este": "this",
+		"próximo": "next"
+	},
+	"months": {
+		"enero": "january",
+		"febrero": "february",
+		"marzo": "march",
+		"abril": "april",
+		"mayo": "may",
+		"junio": "june",
+		"julio": "july",
+		"agosto": "august",
+		"septiembre": "september",
+		"octubre": "october",
+		"noviembre": "november",
+		"diciembre": "december"
+	},
+	"units": {
+		"uno": 1,
+		"dos": 2,
+		"tres": 3,
+		"cuatro": 4,
+		"cinco": 5,
+		"seis": 6,
+		"siete": 7,
+		"ocho": 8,
+		"nueve": 9,
+		"diez": 10,
+		"once": 11,
+		"doce": 12,
+		"trece": 13,
+		"catorce": 14,
+		"quince": 15,
+		"dieciseis": 16,
+		"diecisiete": 17,
+		"dieciocho": 18,
+		"diecinueve": 19,
+		"veinte": 20
+	}
+}

@@ -10,5 +10,7 @@ $datetime = wapmorgan\TimeParser\TimeParser::parse('15:12:13 prochaine lundi pro
 var_dump($datetime->format('r'));
 $datetime = wapmorgan\TimeParser\TimeParser::parse('15:12:13 nächsten montag nächsten jahr im februar nach 15 uhr nach 10 minuten nach 11 secunden nach 5 jahre nach 2 wochen nach 1 tag nach 10 monate', 'german');
 var_dump($datetime->format('r'));
+$datetime = wapmorgan\TimeParser\TimeParser::parse('15:12:13 el próximo lunes en próximo año en febrero en 15 horas en 10 minutos en 11 segundos en 5 años en 2 semanas en 1 día en 10 meses', 'spanish');
+var_dump($datetime->format('r'));
 $datetime = wapmorgan\TimeParser\TimeParser::parse('15:12:13 下星期一 下年 二月 経由15小时 経由10分钟 経由11秒钟 経由5年 経由2星期 経由1天 経由10月', 'chinese');
 var_dump($datetime->format('r'));

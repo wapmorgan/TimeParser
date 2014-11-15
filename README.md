@@ -27,7 +27,7 @@ Sun, 03 Oct 2021 06:22:24 +0400
 ```
 
 ## Languages support
-For this moment four languages supported: Russian, English, French and German. One language support is in progress: Chinese.
+For this moment four languages supported: Russian, English, French and German. Two languages support is in progress: Chinese, Spanish.
 Their rules are in `rules` catalog so you can improve TimeParser by adding new language or by improving existing one.
 For developing reasons you may would like to see process of parsing. To do this call related methods:
 
