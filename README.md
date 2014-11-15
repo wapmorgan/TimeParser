@@ -76,3 +76,11 @@ Numbers up to 20 are available to use.
 - [ ] Tests.
 - [ ] Try to parse combinations: *in 5 hours and 2 minutes*.
 - [x] Try to parse alphabetic offsets: *in five hours* and *через пять часов*.
+
+## Languages ToDo
+
+- [x] Chinese - check hieroglyphs.
+- [x] Spanish - check prepositions.
+- [ ] Portuguese
+- [ ] Arabic
+- [ ] Korean
