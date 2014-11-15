@@ -1,0 +1,9 @@
+{
+	"name": "wapmorgan/time-parser",
+	"description": "is a parser for date & time written in natural language*.",
+	"autoload": {
+		"psr-4": {
+			"wapmorgan\\TimeParser\\": "src/"
+		}
+	}
+}

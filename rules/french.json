@@ -1,0 +1,116 @@
+{
+	"language": "French",
+	"rules": [
+		{
+			"name": "time",
+			"type": "absolute",
+			"regex": "~((?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~"
+		},
+		{
+			"name": "weekday",
+			"type": "absolute",
+			"regex": "~(en)? (?<pronoun>cette|ce|prochaine) (?<weekday>lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)~"
+		},
+		{
+			"name": "year",
+			"type": "absolute",
+			"regex": "~((?<pronoun>cette|ce|prochaine)|((?<digit>[[:digit:]]+))) année~u"
+		},
+		{
+			"name": "month",
+			"type": "absolute",
+			"regex": "~((?<pronoun>cette|ce|prochaine) mois|(?<month>janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre))~u"
+		},
+		{
+			"name": "week",
+			"type": "absolute",
+			"regex": "~(?<pronoun>cette|ce|prochaine) semaine~u"
+		},
+		{
+			"name": "hour",
+			"type": "relative",
+			"regex": "~((bout ?)?(de ?)?((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) heures?)~u"
+		},
+		{
+			"name": "minute",
+			"type": "relative",
+			"regex": "~((bout ?)?(de ?)?((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) minutes?)~u"
+		},
+		{
+			"name": "sec",
+			"type": "relative",
+			"regex": "~((bout ?)?(de ?)?((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) secondes?)~u"
+		},
+		{
+			"name": "year",
+			"type": "relative",
+			"regex": "~((bout ?)?(de ?)?((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) années?)~u"
+		},
+		{
+			"name": "week",
+			"type": "relative",
+			"regex": "~((bout ?)?(de ?)?((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) semaines?)~u"
+		},
+		{
+			"name": "day",
+			"type": "relative",
+			"regex": "~((bout ?)?(de ?)?((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) jours?)~u"
+		},
+		{
+			"name": "month",
+			"type": "relative",
+			"regex": "~((bout ?)?(de ?)?((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) mois?)~u"
+		}
+	],
+	"week_days": {
+		"lundi": "monday",
+		"mardi": "tuesday",
+		"mercredi": "wednesday",
+		"jeudi": "thursday",
+		"vendredi": "friday",
+		"samedi": "saturday",
+		"dimanche": "sunday"
+	},
+	"pronouns": {
+		"ce": "this",
+		"suivant": "next",
+		"cette": "this",
+		"prochaine": "next"
+	},
+	"months": {
+		"janvier": "january",
+		"février": "february",
+		"mars": "march",
+		"avril": "april",
+		"mai": "may",
+		"juin": "june",
+		"juillet": "july",
+		"août": "august",
+		"septembre": "september",
+		"octobre": "october",
+		"novembre": "november",
+		"décembre": "december"
+	},
+	"units": {
+		"une": 1,
+		"deux": 2,
+		"trois": 3,
+		"quatre": 4,
+		"cinq": 5,
+		"six": 6,
+		"sept": 7,
+		"huit": 8,
+		"neuf": 9,
+		"dix": 10,
+		"onze": 11,
+		"douze": 12,
+		"treize": 13,
+		"quatorze": 14,
+		"quinze": 15,
+		"seize": 16,
+		"dix-sept": 17,
+		"dix-huit":18,
+		"dix-neuf": 19,
+		"vingt": 20
+	}
+}

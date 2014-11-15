@@ -1,0 +1,94 @@
+{
+	"language": "Chinese",
+	"rules": [
+{
+			"name": "time",
+			"type": "absolute",
+			"regex": "~((?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~"
+		},
+		{
+			"name": "weekday",
+			"type": "absolute",
+			"regex": "~(?<pronoun>这|下)(?<weekday>星期一|星期二|星期三|星期四|星期五|星期六|星期天)~u"
+		},
+		{
+			"name": "year",
+			"type": "absolute",
+			"regex": "~((?<pronoun>这|下)|((?<digit>[[:digit:]]+)))年~u"
+		},
+		{
+			"name": "month",
+			"type": "absolute",
+			"regex": "~((?<pronoun>这|下)月|(?<month>一月|二月|三月|四月|五月|六月|七月|八月|九月|十月|十一月|十二月))~u"
+		},
+		{
+			"name": "week",
+			"type": "absolute",
+			"regex": "~(?<pronoun>这|下)个星期~u"
+		},
+		{
+			"name": "hour",
+			"type": "relative",
+			"regex": "~経由((?<digit>[[:digit:]]+))小时~u"
+		},
+		{
+			"name": "minute",
+			"type": "relative",
+			"regex": "~経由((?<digit>[[:digit:]]+))分钟~u"
+		},
+		{
+			"name": "sec",
+			"type": "relative",
+			"regex": "~経由((?<digit>[[:digit:]]+))秒钟~u"
+		},
+		{
+			"name": "year",
+			"type": "relative",
+			"regex": "~経由((?<digit>[[:digit:]]+))年~u"
+		},
+		{
+			"name": "week",
+			"type": "relative",
+			"regex": "~経由((?<digit>[[:digit:]]+))星期~u"
+		},
+		{
+			"name": "day",
+			"type": "relative",
+			"regex": "~経由((?<digit>[[:digit:]]+))天~u"
+		},
+		{
+			"name": "month",
+			"type": "relative",
+			"regex": "~経由((?<digit>[[:digit:]]+))月~u"
+		}
+	],
+	"week_days": {
+		"星期一": "monday",
+		"星期二": "tuesday",
+		"星期三": "wednesday",
+		"星期四": "thursday",
+		"星期五": "friday",
+		"星期六": "saturday",
+		"星期天": "sunday"
+	},
+	"pronouns": {
+		"这": "this",
+		"下": "next"
+	},
+	"months": {
+		"一月": "january",
+		"二月": "february",
+		"三月": "march",
+		"四月": "april",
+		"五月": "may",
+		"六月": "june",
+		"七月": "july",
+		"八月": "august",
+		"九月": "september",
+		"十月": "october",
+		"十一月": "november",
+		"十二月": "december"
+	},
+	"units": {
+	}
+}

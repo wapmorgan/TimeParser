@@ -1,0 +1,93 @@
+{
+	"language": "English",
+	"rules": [
+		{
+			"name": "time",
+			"type": "absolute",
+			"regex": "~(at (?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~"
+		},
+		{
+			"name": "weekday",
+			"type": "absolute",
+			"regex": "~(on)? (?<pronoun>next|this) (?<weekday>monday|tuesday|wednesday|thursday|friday|saturday|sunday)~"
+		},
+		{
+			"name": "year",
+			"type": "absolute",
+			"regex": "~((?<pronoun>this|next)|((?<digit>[[:digit:]]+))) year~u"
+		},
+		{
+			"name": "month",
+			"type": "absolute",
+			"regex": "~(in ?)?((?<pronoun>this|next) month|(?<month>january|february|march|april|may|june|july|august|september|october|november|december))~"
+		},
+		{
+			"name": "week",
+			"type": "absolute",
+			"regex": "~(?<pronoun>this|next) week~u"
+		},
+		{
+			"name": "hour",
+			"type": "relative",
+			"regex": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) hours?)~u"
+		},
+		{
+			"name": "minute",
+			"type": "relative",
+			"regex": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) minutes?)~u"
+		},
+		{
+			"name": "sec",
+			"type": "relative",
+			"regex": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) seconds?)~u"
+		},
+		{
+			"name": "year",
+			"type": "relative",
+			"regex": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) years?)~u"
+		},
+		{
+			"name": "week",
+			"type": "relative",
+			"regex": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) weeks?)~u"
+		},
+		{
+			"name": "day",
+			"type": "relative",
+			"regex": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) days?)~u"
+		},
+		{
+			"name": "month",
+			"type": "relative",
+			"regex": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) months?)~u"
+		}
+	],
+	"pronouns": {
+	},
+	"week_days": {
+	},
+	"months": {
+	},
+	"units": {
+		"one": 1,
+		"two": 2,
+		"three": 3,
+		"four": 4,
+		"five": 5,
+		"six": 6,
+		"seven": 7,
+		"eight": 8,
+		"nine": 9,
+		"ten": 10,
+		"eleven": 11,
+		"twelve": 12,
+		"thirteen": 13,
+		"fourteen": 14,
+		"fifteen": 15,
+		"sixteen": 16,
+		"seventeen": 17,
+		"eighteen": 18,
+		"nineteen": 19,
+		"twenty": 20
+	}
+}
