@@ -255,6 +255,6 @@ class TimeParser {
 		if ($data === null) {
 			throw new \Exception(json_last_error());
 		}
-		return new language($data['language'], $data['rules'], $data['week_days'], $data['pronouns'], $data['months'], $data['units']);
+		return new Language($data['language'], $data['rules'], $data['week_days'], $data['pronouns'], $data['months'], $data['units']);
 	}
 }
