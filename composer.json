@@ -1,6 +1,8 @@
 {
 	"name": "wapmorgan/time-parser",
-	"description": "is a parser for date & time written in natural language*.",
+	"description": "A parser for date & time written in natural language",
+	"keywords": ["time", "date", "humanized", "human-written", "parser"],
+	"license": "MIT",
 	"autoload": {
 		"psr-4": {
 			"wapmorgan\\TimeParser\\": "src/"
