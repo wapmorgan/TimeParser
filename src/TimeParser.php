@@ -35,6 +35,8 @@ class TimeParser {
 	}
 
 	static public function parse($string, $languages = 'all', $allowAlphabeticUnits = true) {
+		$string = self::prepareString($string);
+
 		// collect rules
 		$available_languages = array_map(function ($lang) {
 			return strtolower(basename($lang, '.json'));
@@ -290,5 +292,16 @@ class TimeParser {
 			throw new \Exception(json_last_error());
 		}
 		return new Language($data['language'], $data['rules'], $data['week_days'], $data['pronouns'], $data['months'], $data['units']);
+	}
+
+	static private function prepareString($string) {
+		if (function_exists('mb_strtolower')) {
+			if (mb_detect_encoding($string) != 'UTF-8')
+				$string = mb_detect_encoding($string, 'UTF-8');
+			$string = mb_strtolower($string);
+		} else
+			$string = strtolower($string);
+		$string = preg_replace('~[[:space:]]{1,}~', ' ', $string);
+		return $string;
 	}
 }
