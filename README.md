@@ -13,6 +13,7 @@ TimeParser - is a parser for date and time written in natural language for PHP.
 
 ## Installation
 The preferred way to install package is via composer:
+
 ```bash
 composer require wapmorgan/time-parser
 ```
@@ -25,6 +26,7 @@ $datetime = wapmorgan\TimeParser\TimeParser::parse(fgets(STDIN), 'all');
 ```
 
 Second arg is a language. Applicable values:
+
 * `'all'` - scan for all available languages. Use it when you can not predict user's preferred language.
 * `'LANG'` - scan only as time written in LANG.
 * `array('LANG1', 'LANG2')` - scan as LANG1 and then the rest as LANG2.
