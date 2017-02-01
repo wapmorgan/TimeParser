@@ -2,6 +2,11 @@
 	"language": "Russian",
 	"rules": [
 		{
+			"name": "date",
+			"type": "absolute",
+			"regex": "~((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) (?<month>января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря)( (?<year>[[:digit:]]{4})( года)?)?~u"
+		},
+		{
 			"name": "time",
 			"type": "absolute",
 			"regex": "~(в (?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~u"
@@ -81,17 +86,29 @@
 	},
 	"months": {
 		"январе": "january",
+		"января": "january",
 		"феврале": "february",
+		"февраля": "february",
 		"марте": "march",
+		"марта": "march",
 		"апреле": "april",
+		"апреля": "april",
 		"мае": "may",
+		"мая": "may",
 		"июне": "june",
+		"июня": "june",
 		"июле": "july",
+		"июля": "july",
 		"августе": "august",
+		"августа": "august",
 		"сентябре": "september",
+		"сентября": "september",
 		"октябре": "october",
+		"октября": "october",
 		"ноябре": "november",
-		"декабре": "december"
+		"ноября": "november",
+		"декабре": "december",
+		"декабря": "december"
 	},
 	"units": {
 		"один": 1,

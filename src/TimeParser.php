@@ -5,6 +5,21 @@ use \DateTime;
 
 class TimeParser {
 
+	static protected $months = array(
+		'january' => 1,
+		'february' => 2,
+		'march' => 3,
+		'april' => 4,
+		'may' => 5,
+		'june' => 6,
+		'july' => 7,
+		'august' => 8,
+		'september' => 9,
+		'october' => 10,
+		'november' => 11,
+		'december' => 12,
+	);
+
 	static private $debug = false;
 
 	static public function enableDebug() {
@@ -12,7 +27,7 @@ class TimeParser {
 	}
 
 	static public function disableDebug() {
-		self::$debug = true;
+		self::$debug = false;
 	}
 
 	static public function debugging() {
@@ -54,6 +69,25 @@ class TimeParser {
 					DebugStream::show('Matched: '.$rule['regex'].PHP_EOL);
 					if ($rule['type'] == 'absolute') {
 						switch ($rule['name']) {
+							case 'date':
+								$month = $language->translateMonth($matches['month'][0]);
+								if (!empty($matches['year'][0]))
+									$year = $matches['year'][0];
+								else
+									$year = $datetime->format('Y');
+								if (!empty($matches['digit'][0])) {
+									$day = $matches['digit'][0];
+									DebugStream::show('Set date: '.$year.'-'.$month.'-'.$day.PHP_EOL);
+									$datetime->setDate($year, self::$months[$month], $day);
+								} else if ($allowAlphabeticUnits) {
+									$alpha = $language->translateUnit($matches['alpha'][0]);
+									if (is_numeric($alpha)) {
+										DebugStream::show('Set date: '.$year.'-'.$month.'-'.$alpha.PHP_EOL);
+										$datetime->setDate($year, self::$months[$month], $alpha);
+									}
+									// parse here alphabetic value
+								}
+								break;
 							case 'time':
 								if (!empty($matches['sec'])) {
 									$datetime->setTime($matches['hour'][0], $matches['min'][0], $matches['sec'][0]);

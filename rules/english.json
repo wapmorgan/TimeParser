@@ -2,6 +2,11 @@
 	"language": "English",
 	"rules": [
 		{
+			"name": "date",
+			"type": "absolute",
+			"regex": "~((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) (?<month>january|february|march|april|may|june|july|august|september|october|november|december)( (?<year>[[:digit:]]{4})( year)?)?~"
+		},
+		{
 			"name": "time",
 			"type": "absolute",
 			"regex": "~(at (?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~"
