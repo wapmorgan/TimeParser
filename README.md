@@ -12,15 +12,18 @@ TimeParser - is a parser for date and time written in natural language for PHP.
 	```
 
 	Second arg is a language. Applicable values:
-	* 'all' - scan for all available languages. Use it when you can not predict user's preferred language.
-	* 'english' - scan only as english time.
-	* array('english', 'russian') - scan as english and then the rest as russian time.
-	* 'nonexistent-language' - force scan with system strtotime() function. In case of strtotime() scan failure, current DateTime will be returned.
+	* `'all'` - scan for all available languages. Use it when you can not predict user's preferred language.
+	* `'LANG'` - scan only as time written in LANG.
+	* `array('LANG1', 'LANG2')` - scan as LANG1 and then the rest as LANG2.
+	* `'strtotime'` - force scan with system strtotime() function. In case of strtotime() scan failure, current DateTime will be returned.
+
+    All available languages:
+
 
 # Examples of dates written in natural language that will work.
 ```
-в 15:12:13 в следующий понедельник в следующем году в феврале через 15 часов через 10 минут через 11 секунд через 5 лет через 2 недели через 1 день через 10 месяцев
-at 15:12:13 next monday next year in february in 15 hours in 10 minutes in 11 seconds in 5 years in 2 weeks in 1 day in 10 months
+15 декабря 1977 года в 15:12:13 в следующий понедельник в следующем году в феврале через 15 часов через 10 минут через 11 секунд через 5 лет через 2 недели через 1 день через 10 месяцев
+15 december 1977 at 15:12:13 next monday next year in february in 15 hours in 10 minutes in 11 seconds in 5 years in 2 weeks in 1 day in 10 months
 ```
 
 They both will be parsed and result DateTime will contain right date:
@@ -42,6 +45,7 @@ TimeParser::disableDebug();
 ## Parsable substrings
 To understand, how it works, look at substrings separately:
 
+* **15 december 1977** - absolute date
 * **at 15:12:13** - absolute time
 * **next monday** or **this friday** - absolute date
 * **next year** or **2016 year** - absolute date
