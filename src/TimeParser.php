@@ -296,8 +296,8 @@ class TimeParser {
 
 	static private function prepareString($string) {
 		if (function_exists('mb_strtolower')) {
-			if (mb_detect_encoding($string) != 'UTF-8')
-				$string = mb_detect_encoding($string, 'UTF-8');
+			if (($encoding = mb_detect_encoding($string)) != 'UTF-8')
+				$string = mb_convert_encoding($string, 'UTF-8', $encoding);
 			$string = mb_strtolower($string);
 		} else
 			$string = strtolower($string);
