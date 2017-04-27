@@ -118,10 +118,10 @@ class TimeParser {
 									break;
 								case 'time':
 									if (!empty($matches['sec'])) {
-										$datetime = $datetime->setTime($matches['hour'][0], $matches['min'][0], $matches['sec'][0]);
+										$datetime = $datetime->setTime((int)$matches['hour'][0], (int)$matches['min'][0], (int)$matches['sec'][0]);
 										DebugStream::show('Set time: '.$matches['hour'][0].':'.$matches['min'][0].':'.$matches['sec'][0].PHP_EOL);
 									} else {
-										$datetime = $datetime->setTime($matches['hour'][0], $matches['min'][0]);
+										$datetime = $datetime->setTime((int)$matches['hour'][0], (int)$matches['min'][0]);
 										DebugStream::show('Set time: '.$matches['hour'][0].':'.$matches['min'][0].PHP_EOL);
 									}
 									break;
