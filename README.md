@@ -7,7 +7,6 @@ A parser for date and time written in natural language for PHP.
 1. Installation
 2. Usage
 3. Languages support
-4. Parsable substrings
 5. ToDo
 
 ## Installation
@@ -20,15 +19,29 @@ composer require wapmorgan/time-parser
 ## Usage
 Parse some input from user and receive a `DateTime` object.
 
-```php
-$datetime = wapmorgan\TimeParser\TimeParser::parse(fgets(STDIN), 'all');
-```
+1. Create a Parser object
+    ```php
+    $parser = new wapmorgan\TimeParser\TimeParser('all');
+    // If you set second argument of constructor to `true`, TimeParser will be able to parse alphabetic values. Numbers up to 20 are available to use.
+    $parser = new wapmorgan\TimeParser\TimeParser('all', true);
+    ```
 
-Second arg is a language. Applicable values:
+    First argument is a language. Applicable values:
 
-* `'all'` (by default) - scan for all available languages. Use it when you can not predict user's preferred language.
-* `'russian'` - scan only as string written in one language.
-* `array('english', 'russian')` - scan as english and then the rest as russian.
+    * `'all'` (by default) - scan for all available languages. Use it when you can not predict user's preferred language.
+    * `'russian'` - scan only as string written in one language.
+    * `array('english', 'russian')` - scan as english and then the rest as russian.
+
+2. Parse string and return a `DateTimeImmutable` object. If second argument is `true`, method will return `false` when no date&time strings found.
+    ```php
+    $datetime = $parser->parse(fgets(STDIN));
+    // next call returns false
+    $datetime = $parser->parse('abc', true);
+    ```
+
+## Languages support
+For this moment four languages supported: Russian, English, French and German. Two languages support is in progress: Chinese, Spanish.
+Their rules are in `rules` catalog so you can improve TimeParser by adding new language or by improving existing one.
 
 Languages with examples of strings containing date&time:
 
@@ -41,9 +54,6 @@ Languages with examples of strings containing date&time:
 | russian  | 15 декабря 1977 года в 15:12:13 в следующий понедельник в следующем году в феврале через 15 часов через 10 минут через 11 секунд через 5 лет через 2 недели через 1 день через 10 месяцев |
 | spanish  | 15:12:13 el próximo lunes en próximo año en febrero en 15 horas en 10 minutos en 11 segundos en 5 años en 2 semanas en 1 día en 10 meses                                                  |
 
-## Languages support
-For this moment four languages supported: Russian, English, French and German. Two languages support is in progress: Chinese, Spanish.
-Their rules are in `rules` catalog so you can improve TimeParser by adding new language or by improving existing one.
 For developing reasons you may would like to see process of parsing. To do this call related methods:
 
 ```php
@@ -52,7 +62,7 @@ TimeParser::enableDebug();
 TimeParser::disableDebug();
 ```
 
-## Parsable substrings
+### Parsable substrings
 To understand, how it works, look at substrings separately:
 
 * **15 december 1977** - absolute date
@@ -67,19 +77,6 @@ To understand, how it works, look at substrings separately:
 * **in 2 weeks** - relative date
 * **in 1 day** - relative date
 * **in 10 months** - relative date
-
-### Alphabetic unit values
-**If you set second argument of `parse()` to `true`, TimeParser will be able to parse alphabetic values**. Numbers up to 20 are available to use.
-
-* **in fifteen hours**
-* **in ten minutes**
-* **in eleven seconds**
-* **in five years**
-* **in two weeks**
-* **in one day**
-* **in ten months**
-
-In other case alphabetic values will not be parsed.
 
 ## ToDo
 
