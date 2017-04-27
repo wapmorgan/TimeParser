@@ -1,116 +1,72 @@
 {
-	"language": "German",
-	"rules": [
-		{
-			"name": "time",
-			"type": "absolute",
-			"regex": "~((?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~u"
-		},
-		{
-			"name": "weekday",
-			"type": "absolute",
-			"regex": "~(am ?)?(?<pronoun>diesen|nächsten) (?<weekday>montag|dienstag|mittwoch|donnerstag|freitag|sonnabend|samstag|sonntag)~u"
-		},
-		{
-			"name": "year",
-			"type": "absolute",
-			"regex": "~((?<pronoun>diesen|nächsten)|((?<digit>[[:digit:]]+))) Jahr~iu"
-		},
-		{
-			"name": "month",
-			"type": "absolute",
-			"regex": "~(i[nm] ?)((?<pronoun>diesen|nächsten) Monat|(?<month>januar|februar|märz|mai|juni|juli|oktober|dezember))~iu"
-		},
-		{
-			"name": "week",
-			"type": "absolute",
-			"regex": "~(?<pronoun>diesen|nächsten) Woche~u"
-		},
-		{
-			"name": "hour",
-			"type": "relative",
-			"regex": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) uhr)~iu"
-		},
-		{
-			"name": "minute",
-			"type": "relative",
-			"regex": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) minuten?)~iu"
-		},
-		{
-			"name": "sec",
-			"type": "relative",
-			"regex": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) secunden?)~iu"
-		},
-		{
-			"name": "year",
-			"type": "relative",
-			"regex": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) jahre?)~iu"
-		},
-		{
-			"name": "week",
-			"type": "relative",
-			"regex": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) wochen?)~iu"
-		},
-		{
-			"name": "day",
-			"type": "relative",
-			"regex": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) tage?)~iu"
-		},
-		{
-			"name": "month",
-			"type": "relative",
-			"regex": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) monate?)~iu"
-		}
-	],
-	"week_days": {
-		"montag": "monday",
-		"dienstag": "tuesday",
-		"mittwoch": "wednesday",
-		"donnerstag": "thursday",
-		"freitag": "friday",
-		"sonnabend": "saturday",
-		"samstag": "saturday",
-		"sonntag": "sunday"
-	},
-	"pronouns": {
-		"diesen": "this",
-		"nächsten": "next"
-	},
-	"months": {
-		"januar": "january",
-		"februar": "february",
-		"märz": "march",
-		"april": "april",
-		"mai": "may",
-		"juni": "june",
-		"juli": "july",
-		"august": "august",
-		"september": "september",
-		"oktober": "october",
-		"november": "november",
-		"dezember": "december"
-	},
-	"units": {
-		"null": 0,
-		"eins": 1,
-		"zwei": 2,
-		"drei": 3,
-		"vier": 4,
-		"fünf": 5,
-		"sechs": 6,
-		"sieben": 7,
-		"acht": 8,
-		"neun": 9,
-		"zehn": 10,
-		"elf": 11,
-		"zwölf": 12,
-		"dreizehn": 13,
-		"vierzehn": 14,
-		"fünfzehn": 15,
-		"sechzehn": 16,
-		"siebzehn": 17,
-		"achtzehn": 18,
-		"neunzehn": 19,
-		"zwanzig": 20
-	}
+    "language": "German",
+    "rules": {
+        "absolute": {
+            "time": "~((?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~u",
+            "weekday": "~(am ?)?(?<pronoun>diesen|nächsten) (?<weekday>montag|dienstag|mittwoch|donnerstag|freitag|sonnabend|samstag|sonntag)~u",
+            "year": "~((?<pronoun>diesen|nächsten)|((?<digit>[[:digit:]]+))) Jahr~iu",
+            "month": "~(i[nm] ?)((?<pronoun>diesen|nächsten) Monat|(?<month>januar|februar|märz|mai|juni|juli|oktober|dezember))~iu",
+            "week": "~(?<pronoun>diesen|nächsten) Woche~u"
+        },
+        "relative": {
+            "hour": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) uhr)~iu",
+            "minute": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) minuten?)~iu",
+            "sec": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) secunden?)~iu",
+            "year": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) jahre?)~iu",
+            "week": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) wochen?)~iu",
+            "day": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) tage?)~iu",
+            "month": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) monate?)~iu"
+        }
+    },
+    "week_days": {
+        "montag": "monday",
+        "dienstag": "tuesday",
+        "mittwoch": "wednesday",
+        "donnerstag": "thursday",
+        "freitag": "friday",
+        "sonnabend": "saturday",
+        "samstag": "saturday",
+        "sonntag": "sunday"
+    },
+    "pronouns": {
+        "diesen": "this",
+        "nächsten": "next"
+    },
+    "months": {
+        "januar": "january",
+        "februar": "february",
+        "märz": "march",
+        "april": "april",
+        "mai": "may",
+        "juni": "june",
+        "juli": "july",
+        "august": "august",
+        "september": "september",
+        "oktober": "october",
+        "november": "november",
+        "dezember": "december"
+    },
+    "units": {
+        "null": 0,
+        "eins": 1,
+        "zwei": 2,
+        "drei": 3,
+        "vier": 4,
+        "fünf": 5,
+        "sechs": 6,
+        "sieben": 7,
+        "acht": 8,
+        "neun": 9,
+        "zehn": 10,
+        "elf": 11,
+        "zwölf": 12,
+        "dreizehn": 13,
+        "vierzehn": 14,
+        "fünfzehn": 15,
+        "sechzehn": 16,
+        "siebzehn": 17,
+        "achtzehn": 18,
+        "neunzehn": 19,
+        "zwanzig": 20
+    }
 }

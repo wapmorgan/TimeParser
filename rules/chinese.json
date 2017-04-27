@@ -1,127 +1,82 @@
 {
-	"language": "Chinese",
-	"rules": [
-{
-			"name": "time",
-			"type": "absolute",
-			"regex": "~((?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~"
-		},
-		{
-			"name": "weekday",
-			"type": "absolute",
-			"regex": "~(?<pronoun>这|下)(?<weekday>星期一|星期二|星期三|星期四|星期五|星期六|星期天)~u"
-		},
-		{
-			"name": "year",
-			"type": "absolute",
-			"regex": "~((?<pronoun>这|下)|((?<digit>[[:digit:]]+)))年~u"
-		},
-		{
-			"name": "month",
-			"type": "absolute",
-			"regex": "~((?<pronoun>这|下)月|(?<month>一月|二月|三月|四月|五月|六月|七月|八月|九月|十月|十一月|十二月))~u"
-		},
-		{
-			"name": "week",
-			"type": "absolute",
-			"regex": "~(?<pronoun>这|下)个星期~u"
-		},
-		{
-			"name": "hour",
-			"type": "relative",
-			"regex": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))小时~u"
-		},
-		{
-			"name": "minute",
-			"type": "relative",
-			"regex": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))分钟~u"
-		},
-		{
-			"name": "sec",
-			"type": "relative",
-			"regex": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))秒钟~u"
-		},
-		{
-			"name": "year",
-			"type": "relative",
-			"regex": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))年~u"
-		},
-		{
-			"name": "week",
-			"type": "relative",
-			"regex": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))星期~u"
-		},
-		{
-			"name": "day",
-			"type": "relative",
-			"regex": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))天~u"
-		},
-		{
-			"name": "month",
-			"type": "relative",
-			"regex": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))月~u"
-		}
-	],
-	"week_days": {
-		"星期一": "monday",
-		"星期二": "tuesday",
-		"星期三": "wednesday",
-		"星期四": "thursday",
-		"星期五": "friday",
-		"星期六": "saturday",
-		"星期天": "sunday"
-	},
-	"pronouns": {
-		"这": "this",
-		"下": "next"
-	},
-	"months": {
-		"一月": "january",
-		"二月": "february",
-		"三月": "march",
-		"四月": "april",
-		"五月": "may",
-		"六月": "june",
-		"七月": "july",
-		"八月": "august",
-		"九月": "september",
-		"十月": "october",
-		"十一月": "november",
-		"十二月": "december"
-	},
-	"units": {
-		"〇": 0,
-		"一": 1,
-		"二": 2,
-		"三": 3,
-		"四": 4,
-		"五": 5,
-		"六": 6,
-		"七": 7,
-		"八": 8,
-		"九": 9,
-		"十": 10,
-		"十一": 11,
-		"十二": 12,
-		"十三": 13,
-		"十四": 14,
-		"十五": 15,
-		"十六": 16,
-		"十七": 17,
-		"十八": 18,
-		"十九": 19,
-		"二十": 20,
-
-		"零": 0,
-		"壹": 1,
-		"贰": 2,
-		"叁": 3,
-		"肆": 4,
-		"伍": 5,
-		"陆": 6,
-		"柒": 7,
-		"捌": 8,
-		"玖": 9,
-		"拾": 10
-	}
+    "language": "Chinese",
+    "rules": {
+        "absolute": {
+            "time": "~((?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~",
+            "weekday": "~(?<pronoun>这|下)(?<weekday>星期一|星期二|星期三|星期四|星期五|星期六|星期天)~u",
+            "year": "~((?<pronoun>这|下)|((?<digit>[[:digit:]]+)))年~u",
+            "month": "~((?<pronoun>这|下)月|(?<month>一月|二月|三月|四月|五月|六月|七月|八月|九月|十月|十一月|十二月))~u",
+            "week": "~(?<pronoun>这|下)个星期~u"
+        },
+        "relative": {
+            "hour": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))小时~u",
+            "minute": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))分钟~u",
+            "sec": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))秒钟~u",
+            "year": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))年~u",
+            "week": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))星期~u",
+            "day": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))天~u",
+            "month": "~経由((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+))月~u"
+        }
+    },
+    "week_days": {
+        "星期一": "monday",
+        "星期二": "tuesday",
+        "星期三": "wednesday",
+        "星期四": "thursday",
+        "星期五": "friday",
+        "星期六": "saturday",
+        "星期天": "sunday"
+    },
+    "pronouns": {
+        "这": "this",
+        "下": "next"
+    },
+    "months": {
+        "一月": "january",
+        "二月": "february",
+        "三月": "march",
+        "四月": "april",
+        "五月": "may",
+        "六月": "june",
+        "七月": "july",
+        "八月": "august",
+        "九月": "september",
+        "十月": "october",
+        "十一月": "november",
+        "十二月": "december"
+    },
+    "units": {
+        "〇": 0,
+        "一": 1,
+        "二": 2,
+        "三": 3,
+        "四": 4,
+        "五": 5,
+        "六": 6,
+        "七": 7,
+        "八": 8,
+        "九": 9,
+        "十": 10,
+        "十一": 11,
+        "十二": 12,
+        "十三": 13,
+        "十四": 14,
+        "十五": 15,
+        "十六": 16,
+        "十七": 17,
+        "十八": 18,
+        "十九": 19,
+        "二十": 20,
+        "零": 0,
+        "壹": 1,
+        "贰": 2,
+        "叁": 3,
+        "肆": 4,
+        "伍": 5,
+        "陆": 6,
+        "柒": 7,
+        "捌": 8,
+        "玖": 9,
+        "拾": 10
+    }
 }
