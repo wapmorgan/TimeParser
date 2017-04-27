@@ -27,12 +27,11 @@ $datetime = wapmorgan\TimeParser\TimeParser::parse(fgets(STDIN), 'all');
 
 Second arg is a language. Applicable values:
 
-* `'all'` - scan for all available languages. Use it when you can not predict user's preferred language.
-* `'LANG'` - scan only as time written in LANG.
-* `array('LANG1', 'LANG2')` - scan as LANG1 and then the rest as LANG2.
-* `'strtotime'` - force scan with system strtotime() function. In case of strtotime() scan failure, current DateTime will be returned.
+* `'all'` (by default) - scan for all available languages. Use it when you can not predict user's preferred language.
+* `'russian'` - scan only as string written in one language.
+* `array('english', 'russian')` - scan as english and then the rest as russian.
 
-All available languages:
+Languages with examples of strings containing date&time:
 
 | Language | Example                                                                                                                                                                                   |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -42,18 +41,6 @@ All available languages:
 | german   | 15:12:13 nächsten montag nächsten jahr im februar nach 15 uhr nach 10 minuten nach 11 secunden nach 5 jahre nach 2 wochen nach 1 tag nach 10 monate                                       |
 | russian  | 15 декабря 1977 года в 15:12:13 в следующий понедельник в следующем году в феврале через 15 часов через 10 минут через 11 секунд через 5 лет через 2 недели через 1 день через 10 месяцев |
 | spanish  | 15:12:13 el próximo lunes en próximo año en febrero en 15 horas en 10 minutos en 11 segundos en 5 años en 2 semanas en 1 día en 10 meses                                                  |
-
-
-### Example of dates
-```
-15 декабря 1977 года в 15:12:13 в следующий понедельник в следующем году в феврале через 15 часов через 10 минут через 11 секунд через 5 лет через 2 недели через 1 день через 10 месяцев
-15 december 1977 at 15:12:13 next monday next year in february in 15 hours in 10 minutes in 11 seconds in 5 years in 2 weeks in 1 day in 10 months
-```
-
-They both will be parsed and result DateTime will contain right date:
-```
-Sun, 03 Oct 2021 06:22:24 +0400
-```
 
 ## Languages support
 For this moment four languages supported: Russian, English, French and German. Two languages support is in progress: Chinese, Spanish.
@@ -83,7 +70,7 @@ To understand, how it works, look at substrings separately:
 * **in 10 months** - relative date
 
 ### Alphabetic unit values
-**If you set third argument of `parse()` to `true`, TimeParser will be able to parse alphabetic values**:
+**If you set second argument of `parse()` to `true`, TimeParser will be able to parse alphabetic values**. Numbers up to 20 are available to use.
 
 * **in fifteen hours**
 * **in ten minutes**
@@ -93,12 +80,11 @@ To understand, how it works, look at substrings separately:
 * **in one day**
 * **in ten months**
 
-If you want to disallow users use words instead of numbers, save default settings or set third argument of `parse()` to `false`. In this case alphabetic values will not be parsed.
-Numbers up to 20 are available to use.
+In other case alphabetic values will not be parsed.
 
 ## ToDo
 
-- [ ] Tests.
+- [x] Tests.
 - [ ] Try to parse combinations: *in 5 hours and 2 minutes*.
 - [x] Try to parse alphabetic offsets: *in five hours* and *через пять часов*.
 
