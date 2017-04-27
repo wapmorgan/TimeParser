@@ -1,15 +1,14 @@
-TimeParser - is a parser for date and time written in natural language for PHP.
+TimeParser
+=====
+A parser for date and time written in natural language for PHP.
 
 [![Composer package](http://xn--e1adiijbgl.xn--p1acf/badge/wapmorgan/time-parser)](https://packagist.org/packages/wapmorgan/time-parser) [![Latest Stable Version](https://poser.pugx.org/wapmorgan/time-parser/v/stable)](https://packagist.org/packages/wapmorgan/time-parser) [![Total Downloads](https://poser.pugx.org/wapmorgan/time-parser/downloads)](https://packagist.org/packages/wapmorgan/time-parser) [![Latest Unstable Version](https://poser.pugx.org/wapmorgan/time-parser/v/unstable)](https://packagist.org/packages/wapmorgan/time-parser) [![License](https://poser.pugx.org/wapmorgan/time-parser/license)](https://packagist.org/packages/wapmorgan/time-parser) [![Testing](https://travis-ci.org/wapmorgan/TimeParser.svg?branch=master)](https://travis-ci.org/wapmorgan/TimeParser)
 
 1. Installation
 2. Usage
-  1. Example of dates
 3. Languages support
 4. Parsable substrings
-  1. Alphabetic unit values
 5. ToDo
-  1. Languages ToDo
 
 ## Installation
 The preferred way to install package is via composer:
