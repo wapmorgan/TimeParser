@@ -106,12 +106,12 @@ class TimeParser {
 									if (!empty($matches['digit'][0])) {
 										$day = $matches['digit'][0];
 										DebugStream::show('Set date: '.$year.'-'.$month.'-'.$day.PHP_EOL);
-										$datetime = $datetime->setDate($year, self::$months[$month], $day);
+										$datetime = $datetime->setDate((int)$year, self::$months[$month], (int)$day);
 									} else if ($this->allowAlphabeticUnits) {
 										$alpha = $language->translateUnit($matches['alpha'][0]);
 										if (is_numeric($alpha)) {
 											DebugStream::show('Set date: '.$year.'-'.$month.'-'.$alpha.PHP_EOL);
-											$datetime = $datetime->setDate($year, self::$months[$month], $alpha);
+											$datetime = $datetime->setDate((int)$year, self::$months[$month], (int)$alpha);
 										}
 										// parse here alphabetic value
 									}
@@ -136,7 +136,7 @@ class TimeParser {
 										DebugStream::show('Set weekday: this '.$weekday.PHP_EOL);
 									}
 									$date = explode('.', date('d.m.Y', $time));
-									$datetime = $datetime->setDate($date[2], $date[1], $date[0]);
+									$datetime = $datetime->setDate((int)$date[2], (int)$date[1], (int)$date[0]);
 									break;
 								case 'year':
 									if (!empty($matches['pronoun'][0])) {
@@ -147,7 +147,7 @@ class TimeParser {
 										}
 									} else {
 										$year = $matches['digit'][0];
-										$datetime = $datetime->setDate($year, $datetime->format('m'), $datetime->format('d'));
+										$datetime = $datetime->setDate((int)$year, (int)$datetime->format('m'), (int)$datetime->format('d'));
 										DebugStream::show('Set year: '.$year.PHP_EOL);
 									}
 									break;
