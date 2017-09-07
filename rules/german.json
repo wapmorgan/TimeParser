@@ -4,18 +4,18 @@
         "absolute": {
             "time": "~((?<hour>\\d{1,2})\\:(?<min>\\d{2})(\\:(?<sec>\\d{2}))?)~u",
             "weekday": "~(am ?)?(?<pronoun>diesen|nächsten) (?<weekday>montag|dienstag|mittwoch|donnerstag|freitag|sonnabend|samstag|sonntag)~u",
-            "year": "~((?<pronoun>diesen|nächsten)|((?<digit>[[:digit:]]+))) Jahr~iu",
+            "year": "~((?<pronoun>dieses|nächstes)|((?<digit>[[:digit:]]+))) Jahr~iu",
             "month": "~(i[nm] ?)((?<pronoun>diesen|nächsten) Monat|(?<month>januar|februar|märz|mai|juni|juli|oktober|dezember))~iu",
-            "week": "~(?<pronoun>diesen|nächsten) Woche~u"
+            "week": "~(?<pronoun>diese|nächste) Woche~u"
         },
         "relative": {
-            "hour": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) uhr)~iu",
-            "minute": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) minuten?)~iu",
-            "sec": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) secunden?)~iu",
-            "year": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) jahre?)~iu",
-            "week": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) wochen?)~iu",
-            "day": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) tage?)~iu",
-            "month": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) monate?)~iu"
+            "hour": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) Uhr)~iu",
+            "minute": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) Minuten?)~iu",
+            "sec": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) Sekunden?)~iu",
+            "year": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) Jahren?)~iu",
+            "week": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) Wochen?)~iu",
+            "day": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) Tagen?)~iu",
+            "month": "~(nach ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) Monaten?)~iu"
         }
     },
     "week_days": {
