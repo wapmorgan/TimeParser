@@ -2,7 +2,7 @@ TimeParser
 =====
 A parser for date and time written in natural language for PHP.
 
-[![Composer package](http://xn--e1adiijbgl.xn--p1acf/badge/wapmorgan/time-parser)](https://packagist.org/packages/wapmorgan/time-parser) [![Latest Stable Version](https://poser.pugx.org/wapmorgan/time-parser/v/stable)](https://packagist.org/packages/wapmorgan/time-parser) [![Total Downloads](https://poser.pugx.org/wapmorgan/time-parser/downloads)](https://packagist.org/packages/wapmorgan/time-parser) [![Latest Unstable Version](https://poser.pugx.org/wapmorgan/time-parser/v/unstable)](https://packagist.org/packages/wapmorgan/time-parser) [![License](https://poser.pugx.org/wapmorgan/time-parser/license)](https://packagist.org/packages/wapmorgan/time-parser) [![Testing](https://travis-ci.org/wapmorgan/TimeParser.svg?branch=master)](https://travis-ci.org/wapmorgan/TimeParser)
+[![Composer package](http://composer.network/badge/wapmorgan/time-parser)](https://packagist.org/packages/wapmorgan/time-parser) [![Latest Stable Version](https://poser.pugx.org/wapmorgan/time-parser/v/stable)](https://packagist.org/packages/wapmorgan/time-parser) [![Total Downloads](https://poser.pugx.org/wapmorgan/time-parser/downloads)](https://packagist.org/packages/wapmorgan/time-parser) [![Latest Unstable Version](https://poser.pugx.org/wapmorgan/time-parser/v/unstable)](https://packagist.org/packages/wapmorgan/time-parser) [![License](https://poser.pugx.org/wapmorgan/time-parser/license)](https://packagist.org/packages/wapmorgan/time-parser) [![Testing](https://travis-ci.org/wapmorgan/TimeParser.svg?branch=master)](https://travis-ci.org/wapmorgan/TimeParser)
 
 1. Installation
 2. Usage
