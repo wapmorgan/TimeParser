@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__.'/../vendor/autoload.php';
 
 use wapmorgan\TimeParser\TimeParser;
+use PHPUnit\Framework\TestCase;
 
-class TimeParseTest extends PHPUnit_Framework_TestCase {
+class TimeParseTest extends TestCase {
     public function setUp() {
         // TimeParser::enableDebug();
     }
