@@ -10,13 +10,13 @@
 			"week": "~(?<pronoun>this|next) week~u"
 		},
 		"relative": {
-			"hour": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) hours?)~u",
-			"minute": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) minutes?)~u",
-			"sec": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) seconds?)~u",
-			"year": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) years?)~u",
-			"week": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) weeks?)~u",
-			"day": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) days?)~u",
-			"month": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:]]+)) months?)~u"
+			"hour": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) hours?)~u",
+			"minute": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) minutes?)~u",
+			"sec": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) seconds?)~u",
+			"year": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) years?)~u",
+			"week": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) weeks?)~u",
+			"day": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) days?)~u",
+			"month": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) months?)~u"
 		}
 	},
 	"pronouns": {
@@ -26,6 +26,8 @@
 	"months": {
 	},
 	"units": {
+		"an": 1,
+		"a": 1,
 		"one": 1,
 		"two": 2,
 		"three": 3,
@@ -45,6 +47,9 @@
 		"seventeen": 17,
 		"eighteen": 18,
 		"nineteen": 19,
-		"twenty": 20
+		"twenty": 20,
+		"thirty": 30,
+		"forty": 40,
+		"fifty": 50
 	}
 }
