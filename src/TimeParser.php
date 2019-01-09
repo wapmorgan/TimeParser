@@ -25,6 +25,7 @@ class TimeParser {
 	);
 
 	static private $debug = false;
+	static private $wordsToNumber = null;
 
 	static public function enableDebug() {
 		self::$debug = true;
@@ -36,6 +37,10 @@ class TimeParser {
 
 	static public function debugging() {
 		return self::$debug;
+	}
+
+	static public function setWordsToNumberCallback(callable $callback) {
+		self::$wordsToNumber = $callback;
 	}
 
 	public function __construct($languages = null) {
@@ -85,7 +90,7 @@ class TimeParser {
 		}
 	}
 
-	public function parse($string, $falseWhenNotChanged = false) {
+	public function parse($string, $falseWhenNotChanged = false, &$result = null) {
 		$string = self::prepareString($string);
 		$datetime = $current_datetime = new DateTimeImmutable();
 
@@ -171,110 +176,46 @@ class TimeParser {
 									break;
 							}
 						} else if ($rule_type == 'relative') {
+							$digit = isset($matches['digit'][0]) ? $matches['digit'][0] : '';
+							$alpha = isset($matches['alpha'][0]) ? $matches['alpha'][0] : '';
+
+							if ($digit === '' && $alpha === '') {
+								$digit = 1;
+							}
+
 							switch ($rule_name) {
 								case 'hour':
-									if (!empty($matches['digit'][0])) {
-										$hour = $matches['digit'][0];
-										$datetime = $datetime->modify('+'.$hour.' hour');
-										DebugStream::show('Add offset: +'.$hour.' hour'.PHP_EOL);
-									} else if ($this->allowAlphabeticUnits) {
-										$alpha = $language->translateUnit($matches['alpha'][0]);
-										if (is_numeric($alpha)) {
-											DebugStream::show('Add offset: +'.$alpha.' hours'.PHP_EOL);
-											$datetime = $datetime->modify('+'.$alpha.' hours');
-										}
-										// parse here alphabetic value
-									}
-									break;
-
 								case 'minute':
-									if (!empty($matches['digit'][0])) {
-										$minute = $matches['digit'][0];
-										$datetime = $datetime->modify('+'.$minute.' minute');
-										DebugStream::show('Add offset: +'.$minute.' minute'.PHP_EOL);
-									} else if ($this->allowAlphabeticUnits) {
-										$alpha = $language->translateUnit($matches['alpha'][0]);
-										if (is_numeric($alpha)) {
-											DebugStream::show('Add offset: +'.$alpha.' minutes'.PHP_EOL);
-											$datetime = $datetime->modify('+'.$alpha.' minutes');
-										}
-										// parse here alphabetic value
-									}
-									break;
-
 								case 'sec':
-									if (!empty($matches['digit'][0])) {
-										$sec = $matches['digit'][0];
-										$datetime = $datetime->modify('+'.$sec.' second');
-										DebugStream::show('Add offset: +'.$sec.' second'.PHP_EOL);
-									} else if ($this->allowAlphabeticUnits) {
-										$alpha = $language->translateUnit($matches['alpha'][0]);
-										if (is_numeric($alpha)) {
-											DebugStream::show('Add offset: +'.$alpha.' seconds'.PHP_EOL);
-											$datetime = $datetime->modify('+'.$alpha.' seconds');
-										}
-										// parse here alphabetic value
-									}
-									break;
-
 								case 'year':
-									if (!empty($matches['digit'][0])) {
-										$year = $matches['digit'][0];
-										$datetime = $datetime->modify('+'.$year.' year');
-										DebugStream::show('Add offset: +'.$year.' year'.PHP_EOL);
-									} else if ($this->allowAlphabeticUnits) {
-										$alpha = $language->translateUnit($matches['alpha'][0]);
-										if (is_numeric($alpha)) {
-											DebugStream::show('Add offset: +'.$alpha.' years'.PHP_EOL);
-											$datetime = $datetime->modify('+'.$alpha.' year');
-										}
-										// parse here alphabetic value
-									}
-									break;
-
 								case 'week':
-									if (!empty($matches['digit'][0])) {
-										$week = $matches['digit'][0];
-										$datetime = $datetime->modify('+'.$week.' week');
-										DebugStream::show('Add offset: +'.$week.' week'.PHP_EOL);
-									} else if ($this->allowAlphabeticUnits) {
-										$alpha = $language->translateUnit($matches['alpha'][0]);
-										if (is_numeric($alpha)) {
-											DebugStream::show('Add offset: +'.$alpha.' weeks'.PHP_EOL);
-											$datetime = $datetime->modify('+'.$alpha.' weeks');
-										}
-										// parse here alphabetic value
-									}
-									break;
-
 								case 'day':
-									if (!empty($matches['digit'][0])) {
-										$day = $matches['digit'][0];
-										$datetime = $datetime->modify('+'.$day.' day');
-										DebugStream::show('Add offset: +'.$day.' day'.PHP_EOL);
-									} else if ($this->allowAlphabeticUnits) {
-										$alpha = $language->translateUnit($matches['alpha'][0]);
-										if (is_numeric($alpha)) {
-											DebugStream::show('Add offset: +'.$alpha.' days'.PHP_EOL);
-											$datetime = $datetime->modify('+'.$alpha.' days');
-										}
-										// parse here alphabetic value
-									}
-									break;
-
 								case 'month':
-									if (!empty($matches['digit'][0])) {
-										$month = $matches['digit'][0];
-										$datetime = $datetime->modify('+'.$month.' month');
-										DebugStream::show('Add offset: +'.$month.' month'.PHP_EOL);
-									} else if ($this->allowAlphabeticUnits) {
-										$alpha = $language->translateUnit($matches['alpha'][0]);
-										if (is_numeric($alpha)) {
-											DebugStream::show('Add offset: +'.$alpha.' months'.PHP_EOL);
-											$datetime = $datetime->modify('+'.$alpha.' months');
+									if ($alpha !== '' && $this->allowAlphabeticUnits) {
+										$digit = $language->translateUnit($alpha);
+
+										if (!is_numeric($digit)) {
+											if (is_callable(self::$wordsToNumber)) {
+												$digit = call_user_func(self::$wordsToNumber, $alpha, $rule_name);
+											} else {
+												$alpha = strtr($alpha, $language->units);
+												$parts = array_filter(array_map(
+													function ($val) {
+														return floatval($val);
+													},
+													preg_split('/[\s-]+/', $alpha)
+												));
+
+												$digit = array_sum($parts);
+											}
 										}
-										// parse here alphabetic value
 									}
+
+									if ($digit && is_numeric($digit)) {
+										DebugStream::show('Add offset: +'.$digit.' '.$rule_name.PHP_EOL);
+										$datetime = $datetime->modify('+'.$digit.' '.$rule_name);
+									}
+
 									break;
 							}
 						}
@@ -282,18 +223,21 @@ class TimeParser {
 				}
 			}
 		}
+
+		$result = $string;
+
 		if ($datetime === $current_datetime && $falseWhenNotChanged)
 			return false;
 		return $datetime;
 	}
 
-	static public function parseString($string, $languages = 'all', $allowAlphabeticUnits = false, $falseWhenNotChanged = false) {
+	static public function parseString($string, $languages = 'all', $allowAlphabeticUnits = false, $falseWhenNotChanged = false, &$result = null) {
 		static $parsers = array();
 		if (!isset($parser[is_array($languages) ? implode(',', $languages) : $languages])) {
 			$parsers[is_array($languages) ? implode(',', $languages) : $languages] = new self($languages);
 			if ($allowAlphabeticUnits) $parsers[is_array($languages) ? implode(',', $languages) : $languages]->allowAlphabeticUnits();
 		}
-		return $parsers[is_array($languages) ? implode(',', $languages) : $languages]->parse($string, $falseWhenNotChanged);
+		return $parsers[is_array($languages) ? implode(',', $languages) : $languages]->parse($string, $falseWhenNotChanged, $result);
 	}
 
 	/**
