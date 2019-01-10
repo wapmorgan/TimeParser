@@ -22,8 +22,6 @@ Parse some input from user and receive a `DateTime` object.
 1. Create a Parser object
     ```php
     $parser = new wapmorgan\TimeParser\TimeParser('all');
-    // If you set second argument of constructor to `true`, TimeParser will be able to parse alphabetic values. Numbers up to 20 are available to use.
-    $parser = new wapmorgan\TimeParser\TimeParser('all', true);
     ```
 
     First argument is a language. Applicable values:
@@ -32,11 +30,32 @@ Parse some input from user and receive a `DateTime` object.
     * `'russian'` - scan only as string written in one language.
     * `array('english', 'russian')` - scan as english and then the rest as russian.
 
-2. Parse string and return a `DateTimeImmutable` object. If second argument is `true`, method will return `false` when no date&time strings found.
+2. Enable and disable parsing of alphabetic values.
+    ```php
+    // To enable alphabetic parsing.
+    $parser->allowAlphabeticUnits();
+    // To disable alphabetic parsing.
+    $parser->disallowAlphabeticUnits();
+    ```
+
+3. Parse string and return a `DateTimeImmutable` object. If second argument is `true`, method will return `false` when no date&time strings found. If third parameter is provided, then it is filled with the string obtained after all the transformations.
     ```php
     $datetime = $parser->parse(fgets(STDIN));
     // next call returns false
     $datetime = $parser->parse('abc', true);
+    // $result will contains "we will come "
+    $datetime = $parser->parse('We will come in a week', true, $result);
+    ```
+4. For advanced parsing of alphabetic values is used built-in function. You can specify your own handler for this feature. Сurrently is used for russian and english languages only.
+    ```
+    use wapmorgan\TimeParser\TimeParser;
+
+    // $string will contains alphabetic value for advanced parsing. 
+    // Ex.: for string "in twenty five minutes", it will contains "twenty five".
+    // $rule will contains name of the parsed rule: year, month, day etc.
+    TimeParser::setWordsToNumberCallback(function($string, $rule) {
+        // do some magic
+    });
     ```
 
 ## Languages support
@@ -77,6 +96,10 @@ To understand, how it works, look at substrings separately:
 * **in 2 weeks** - relative date
 * **in 1 day** - relative date
 * **in 10 months** - relative date
+* **через час** - relative date (russian, english only)
+* **in a hour** - relative date (russian, english only)
+* **через двадцать пять минут** - relative date (russian, english only)
+* **in twenty five minutes** - relative date (russian, english only)
 
 ## ToDo
 
