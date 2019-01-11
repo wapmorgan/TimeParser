@@ -52,10 +52,15 @@ Parse some input from user and receive a `DateTime` object.
 
     // $string will contains alphabetic value for advanced parsing. 
     // Ex.: for string "in twenty five minutes", it will contains "twenty five".
-    // $rule will contains name of the parsed rule: year, month, day etc.
-    TimeParser::setWordsToNumberCallback(function($string, $rule) {
+    // $lang will contains name of the parsed language.
+    TimeParser::setWordsToNumberCallback(function($string, $lang) {
         // do some magic
     });
+    ```
+5. You can add your own custom language.
+    ```php
+    // $date must be an array with a structure like the existing rules.
+    $parser->addLanguage($data);
     ```
 
 ## Languages support
@@ -100,6 +105,12 @@ To understand, how it works, look at substrings separately:
 * **in a hour** - relative date (russian, english only)
 * **через двадцать пять минут** - relative date (russian, english only)
 * **in twenty five minutes** - relative date (russian, english only)
+* **пять минут назад** - relative date (russian, english only)
+* **five minutes ago** - relative date (russian, english only)
+* **5 минут назад** - relative date (russian, english only)
+* **5 minutes ago** - relative date (russian, english only)
+* **вчера** - relative date (russian, english only)
+* **yesterday** - relative date (russian, english only)
 
 ## ToDo
 
