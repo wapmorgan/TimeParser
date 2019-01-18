@@ -1,8 +1,9 @@
 <?php
 
 use wapmorgan\TimeParser\TimeParser;
+use PHPUnit\Framework\TestCase;
 
-class TimeParserTest extends PHPUnit_Framework_TestCase
+class TimeParserTest extends TestCase
 {
     protected static $parsers = [];
 
