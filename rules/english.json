@@ -16,7 +16,18 @@
 			"year": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) years?)~u",
 			"week": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) weeks?)~u",
 			"day": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) days?)~u",
-			"month": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) months?)~u"
+			"month": "~(in ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) months?)~u",
+            "-$1 hour": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?hours? ago)~u",
+            "-$1 minute": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?minutes? ago)~u",
+            "-$1 sec": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?seconds? ago)~u",
+            "-$1 year": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?years? ago)~u",
+            "-$1 week": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?weeks? ago)~u",
+            "-$1 day": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?days? ago)~u",
+            "-$1 month": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?months? ago)~u",
+            "+2 day": "~\\bday after tomorrow\\b~u",
+            "+1 day": "~\\btomorrow\\b~u",
+            "-2 day": "~\\bthe day before yesterday\\b~u",
+            "-1 day": "~\\byesterday\\b~u"
 		}
 	},
 	"pronouns": {

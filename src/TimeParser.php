@@ -5,7 +5,6 @@ use DateTimeImmutable;
 use Exception;
 
 class TimeParser {
-	protected $languages;
 	protected $languagesRules = array();
 	protected $allowAlphabeticUnits = false;
 
@@ -44,9 +43,7 @@ class TimeParser {
 	}
 
 	public function __construct($languages = null) {
-		if (!empty($languages))
-			$this->languages = $languages;
-		$this->populateLanguageRules();
+		$this->populateLanguageRules($languages);
 	}
 
 	public function allowAlphabeticUnits() {
@@ -57,51 +54,88 @@ class TimeParser {
 		$this->allowAlphabeticUnits = false;
 	}
 
-	protected function populateLanguageRules() {
+	protected function populateLanguageRules($languages = null) {
 		// collect rules
-		$available_languages = array_map(function ($lang) {
+		$availableLanguages = array_map(function ($lang) {
 			return strtolower(basename($lang, '.json'));
 		}, glob(dirname(__FILE__).'/../rules/*.json'));
 
-		if ($this->languages !== 'all') {
-			if (is_array($this->languages)) {
-				$available_languages = array_intersect($this->languages, $available_languages);
-				if (!empty($available_languages)) {
-					DebugStream::show('Selected languages: '.implode(', ', $available_languages).PHP_EOL);
-				} else {
-					// DebugStream::show('Parsing with default strtotime()'.PHP_EOL);
-					throw new Exception('Unknown languages used: '.implode(',', $this->languages));
-					// return self::parseWithStrtotime($string);
-				}
-			} else {
-				if (in_array($this->languages, $available_languages)) {
-					$available_languages = array($this->languages);
-					DebugStream::show('Selected language: '.$this->languages.PHP_EOL);
-				} else {
-					// DebugStream::show('Parsing with default strtotime()'.PHP_EOL);
-					throw new Exception('Unknown language used: '.$this->languages);
-					// return self::parseWithStrtotime($string);
-				}
+		if ($languages !== null && $languages !== 'all') {
+			if (!is_array($languages)) {
+				$languages = [$languages];
+			}
+
+			$availableLanguages = array_intersect($languages, $availableLanguages);
+
+			if (empty($availableLanguages)) {
+				throw new Exception(sprintf('Unknown language used: %s', 
+					implode(', ', array_diff($languages, $availableLanguages))
+				));
 			}
 		}
 
-		foreach ($available_languages as $language) {
-			$this->languagesRules[$language] = self::populateRules($language);
+		foreach ($availableLanguages as $language) {
+			$data = json_decode(file_get_contents(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'rules'.DIRECTORY_SEPARATOR.$language.'.json'), true);
+
+			if (json_last_error() !== JSON_ERROR_NONE) {
+				throw new Exception(json_last_error_msg());
+			}
+			
+			$this->addLanguage($data);
 		}
+	}
+
+	public function addLanguage(array $data)
+	{
+		if (!isset($data['language']) 
+			|| !is_string($data['language'])
+			|| !preg_match('/^[a-z]+((\s|\/)[a-z]+)?$/ui', $data['language'])
+		) {
+			throw new Exception('Wrong language name given');
+		}
+
+		if (!isset($data['rules']['absolute']) || !is_array($data['rules']['absolute'])) {
+			throw new Exception('"rules.absolute" must be an array');
+		}
+
+		if (!isset($data['rules']['relative']) || !is_array($data['rules']['relative'])) {
+			throw new Exception('"rules.relative" must be an array');
+		}
+
+		if (!isset($data['week_days']) || !is_array($data['week_days'])) {
+			throw new Exception('"week_days" must be an array');
+		}
+
+		if (!isset($data['pronouns']) || !is_array($data['pronouns'])) {
+			throw new Exception('"pronouns" must be an array');
+		}
+
+		if (!isset($data['months']) || !is_array($data['months'])) {
+			throw new Exception('"months" must be an array');
+		}
+
+		if (!isset($data['units']) || !is_array($data['units'])) {
+			throw new Exception('"months" must be an array');
+		}
+
+		$name = mb_strtolower($data['language']);
+		$lang = new Language($data['language'], $data['rules'], $data['week_days'], $data['pronouns'], $data['months'], $data['units']);
+
+		$this->languagesRules[$name] = $lang;
 	}
 
 	public function parse($string, $falseWhenNotChanged = false, &$result = null) {
 		$string = self::prepareString($string);
-		$datetime = $current_datetime = new DateTimeImmutable();
+		$datetime = $currentDatetime = new DateTimeImmutable();
 
 		// apply rules
-		foreach ($this->languagesRules as $language) {
-			foreach ($language->rules as $rule_type => $rules) {
-				foreach ($rules as $rule_name => $rule_regex) {
-					if (self::match($rule_regex, $string, $matches)) {
-						DebugStream::show('Matched: '.$rule_regex.PHP_EOL);
-						if ($rule_type == 'absolute') {
-							switch ($rule_name) {
+		foreach ($this->languagesRules as $name => $language) {
+			foreach ($language->rules as $ruleType => $rules) {
+				foreach ($rules as $ruleName => $ruleRegex) {
+					if (self::match($ruleRegex, $string, $matches)) {
+						DebugStream::show('Matched: '.$ruleRegex.PHP_EOL);
+						if ($ruleType == 'absolute') {
+							switch ($ruleName) {
 								case 'date':
 									$month = $language->translateMonth($matches['month'][0]);
 									if (!empty($matches['year'][0]))
@@ -175,7 +209,7 @@ class TimeParser {
 									}
 									break;
 							}
-						} else if ($rule_type == 'relative') {
+						} else if ($ruleType == 'relative') {
 							$digit = isset($matches['digit'][0]) ? $matches['digit'][0] : '';
 							$alpha = isset($matches['alpha'][0]) ? $matches['alpha'][0] : '';
 
@@ -183,40 +217,37 @@ class TimeParser {
 								$digit = 1;
 							}
 
-							switch ($rule_name) {
-								case 'hour':
-								case 'minute':
-								case 'sec':
-								case 'year':
-								case 'week':
-								case 'day':
-								case 'month':
-									if ($alpha !== '' && $this->allowAlphabeticUnits) {
-										$digit = $language->translateUnit($alpha);
+							if ($alpha !== '' && $this->allowAlphabeticUnits) {
+								$digit = $language->translateUnit($alpha);
 
-										if (!is_numeric($digit)) {
-											if (is_callable(self::$wordsToNumber)) {
-												$digit = call_user_func(self::$wordsToNumber, $alpha, $rule_name);
-											} else {
-												$alpha = strtr($alpha, $language->units);
-												$parts = array_filter(array_map(
-													function ($val) {
-														return floatval($val);
-													},
-													preg_split('/[\s-]+/', $alpha)
-												));
+								if (!is_numeric($digit)) {
+									if (is_callable(self::$wordsToNumber)) {
+										$digit = call_user_func(self::$wordsToNumber, $alpha, $name);
+									} else {
+										$alpha = strtr($alpha, $language->units);
+										$parts = array_filter(array_map(
+											function ($val) {
+												return floatval($val);
+											},
+											preg_split('/[\s-]+/', $alpha)
+										));
 
-												$digit = array_sum($parts);
-											}
-										}
+										$digit = array_sum($parts);
 									}
+								}
+							}
 
-									if ($digit && is_numeric($digit)) {
-										DebugStream::show('Add offset: +'.$digit.' '.$rule_name.PHP_EOL);
-										$datetime = $datetime->modify('+'.$digit.' '.$rule_name);
-									}
+							if ($digit && is_numeric($digit)) {
+								if (preg_match('/^[a-z]+$/', $ruleName)) {
+									$modify = "+{$digit} {$ruleName}";
+								} else {
+									$modify = str_replace('$1', $digit, $ruleName);
+								}
 
-									break;
+								if (preg_match('/^[\+\-]\d+ [a-z]+$/', $modify)) {
+									DebugStream::show('Add offset: '.$modify.PHP_EOL);
+									$datetime = $datetime->modify($modify);
+								}
 							}
 						}
 					}
@@ -224,20 +255,23 @@ class TimeParser {
 			}
 		}
 
-		$result = $string;
+		$result = trim(preg_replace(['/^[\pZ\pC]+|[\pZ\pC]+$/u', '/[\pZ\pC]{2,}/u'], ['', ' '], $string));
 
-		if ($datetime === $current_datetime && $falseWhenNotChanged)
+		if ($datetime === $currentDatetime && $falseWhenNotChanged)
 			return false;
 		return $datetime;
 	}
 
 	static public function parseString($string, $languages = 'all', $allowAlphabeticUnits = false, $falseWhenNotChanged = false, &$result = null) {
 		static $parsers = array();
-		if (!isset($parser[is_array($languages) ? implode(',', $languages) : $languages])) {
-			$parsers[is_array($languages) ? implode(',', $languages) : $languages] = new self($languages);
-			if ($allowAlphabeticUnits) $parsers[is_array($languages) ? implode(',', $languages) : $languages]->allowAlphabeticUnits();
+
+		$key = is_array($languages) ? implode(',', $languages) : $languages;
+
+		if (!isset($parsers[$key])) {
+			$parsers[$key] = new self($languages);
+			if ($allowAlphabeticUnits) $parsers[$key]->allowAlphabeticUnits();
 		}
-		return $parsers[is_array($languages) ? implode(',', $languages) : $languages]->parse($string, $falseWhenNotChanged, $result);
+		return $parsers[$key]->parse($string, $falseWhenNotChanged, $result);
 	}
 
 	/**
@@ -266,14 +300,6 @@ class TimeParser {
 			$datetime->setTimestamp($time);
 			return $datetime;
 		}
-	}
-
-	static private function populateRules($language) {
-		$data = json_decode(file_get_contents(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'rules'.DIRECTORY_SEPARATOR.$language.'.json'), true);
-		if ($data === null) {
-			throw new Exception(json_last_error());
-		}
-		return new Language($data['language'], $data['rules'], $data['week_days'], $data['pronouns'], $data['months'], $data['units']);
 	}
 
 	static private function prepareString($string) {

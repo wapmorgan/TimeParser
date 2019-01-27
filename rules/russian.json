@@ -10,13 +10,24 @@
             "week": "~на (?<pronoun>этой|следующей) неделе~u"
         },
         "relative": {
-            "hour": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? (часов|часа?))~u",
-            "minute": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? (минуту|минуты|минут|мин))~u",
-            "sec": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? (секунду|секунд|сек))~u",
+            "hour": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? час(а|ов)?)~u",
+            "minute": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? мин(ут[уы]?)?)~u",
+            "sec": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? сек(унд[уы]?)?)~u",
             "year": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? (лет|года?))~u",
-            "week": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? (неделю|недель|недели))~u",
-            "day": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? (дней|день|дня))~u",
-            "month": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? (месяцев|месяца|месяц))~u"
+            "week": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? недел[юиь])~u",
+            "day": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? (день|дн(я|ей)))~u",
+            "month": "~(через( ((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)))? месяц(а|ев)?)~u",
+            "-$1 hour": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?час(а|ов)? назад)~u",
+            "-$1 minute": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?мин(ут[уы]?)? назад)~u",
+            "-$1 sec": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?сек(унд[уы]?)? назад)~u",
+            "-$1 year": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?(лет|года?) назад)~u",
+            "-$1 week": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?недел[юиь] назад)~u",
+            "-$1 day": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?(день|дн(я|ей)) назад)~u",
+            "-$1 month": "~((((?<digit>[[:digit:]]+)|(?<alpha>[[:alpha:][:space:]]+)) )?месяц(а|ев)? назад)~u",
+            "+1 day": "~\\bзавтра\\b~u",
+            "+2 day": "~\\bпослезавтра\\b~u",
+            "-1 day": "~\\bвчера\\b~u",
+            "-2 day": "~\\bпозавчера\\b~u"
         }
     },
     "week_days": {
